@@ -1,0 +1,13 @@
+# MusicBell 点歌铃 —— ClassIsland 桥接插件
+id: chenyanglt.musicbell
+name: MusicBell 点歌铃
+description: 在 ClassIsland 的行动里放歌：把歌名交给 MusicBell，由它打开网易云并搜索播放。
+entranceAssembly: "MusicBell.ClassIsland.dll"
+url: https://github.com/ChenyangLT/MusicBell.ClassIsland
+version: 1.0.0.1
+apiVersion: 2.1.0.1
+author: ChenyangLT
+readme: README.md
+icon: icon.png
+supportedOSPlatforms:
+  - windows
