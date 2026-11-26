@@ -6,6 +6,10 @@
 | --- | --- |
 | **MusicBell 放一首歌** | 填上「歌手 歌名」，由 MusicBell 打开网易云、在搜索框里搜出来播放。 |
 | **MusicBell 放下一首排歌** | 不填歌名，让 MusicBell 按自己的排歌表放下一首。 |
+| **MusicBell 播放 / 暂停** | 内置播放器在放歌时暂停，再执行一次继续。 |
+| **MusicBell 停止播放** | 只停内置播放器，网易云客户端不动。 |
+| **MusicBell 关闭网易云音乐** | 结束 cloudmusic.exe（内置播放器一起停），上课打铃收尾很合适。 |
+| **MusicBell 打开网易云音乐** | 把客户端叫出来放前台，不搜索也不放歌。 |
 
 插件本身不碰音频：它只是把歌名通过 `musicbell://` 协议（或命令行）交给 MusicBell，由 MusicBell 完成「叫出网易云 → 点搜索框 → 粘贴 → 回车 → 播放」。所以 MusicBell 需要装着并且正在运行。
 
@@ -55,6 +59,8 @@ Compress-Archive -Path out\* -DestinationPath MusicBell.ClassIsland.cipx
 Plugin.cs                       插件入口（[PluginEntrance]）
 PlaySongAction.cs               「放一首歌」行动
 PlayNextAction.cs               「放下一首排歌」行动
+SimpleActions.cs                暂停 / 停止 / 关客户端 / 开客户端 四个行动
+SimpleActionSettings.cs         这四个行动共用的设置（可选 exe 路径）
 *SettingsControl.cs             行动设置面板（纯 C# 搭的 Avalonia 界面）
 MusicBellLauncher.cs            调起 MusicBell：先协议，失败退回命令行
 Settings.cs                     两个行动各自的可序列化设置

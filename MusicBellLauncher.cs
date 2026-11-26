@@ -62,6 +62,36 @@ internal static class MusicBellLauncher
         });
     }
 
+    /// <summary>停掉内置播放器。</summary>
+    public static void Stop(string? exePath = null) => Send("stop", exePath, "--stop", "停止播放");
+
+    /// <summary>播放 / 暂停切换。</summary>
+    public static void Pause(string? exePath = null) => Send("pause", exePath, "--pause", "播放/暂停");
+
+    /// <summary>关掉网易云客户端（同时停掉内置播放器）。</summary>
+    public static void CloseMusic(string? exePath = null) => Send("close", exePath, "--close", "关闭网易云音乐");
+
+    /// <summary>打开（或叫到前台）网易云客户端。</summary>
+    public static void OpenMusic(string? exePath = null) => Send("open", exePath, "--open-native", "打开网易云音乐");
+
+    static void Send(string host, string? exePath, string fallbackArg, string actionName)
+    {
+        if (TryStartUrl(Build($"{host}?src=classisland"))) return;
+
+        var exe = FindExe(exePath);
+        if (exe is null)
+            throw new InvalidOperationException(
+                $"没能叫起 MusicBell，所以没法{actionName}。请先在 MusicBell 的「设置 → 联动」里注册 musicbell 协议，或在行动设置里填上 MusicBell.exe 的完整路径。");
+
+        Process.Start(new ProcessStartInfo
+        {
+            FileName = exe,
+            Arguments = fallbackArg,
+            UseShellExecute = true,
+            WorkingDirectory = Path.GetDirectoryName(exe) ?? Environment.CurrentDirectory
+        });
+    }
+
     static string Build(string tail) => $"{Scheme}://{tail}";
 
     static bool TryStartUrl(string url)
